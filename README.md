@@ -1,6 +1,5 @@
 # YAMLSourceMap
-__Map YAML/JSON document texts to data values and vice versa, in 
-Java.__
+__Map YAML to data values, and back, in Java.__
 
 ## Overview
 
