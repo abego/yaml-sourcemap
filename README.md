@@ -1,5 +1,5 @@
 # YAMLSourceMap
-__Map YAML to data values, and back, in Java.__
+__Map YAML to data values, and back. In Java.__
 
 ## Overview
 
