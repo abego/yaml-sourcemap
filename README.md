@@ -1,6 +1,6 @@
 # YAMLSourceMap
-__Java library to map between YAML/JSON document texts and data values in 
-Java, in both directions__
+__Map YAML/JSON document texts to data values and vice versa, in 
+Java.__
 
 ## Overview
 
@@ -89,6 +89,19 @@ like ":", "[" etc.) you can use the method `YAMLSourceMap.sourceOfJsonPointer(..
     String jsonPointer = "/bill-to/address";
     YAMLRange range = srcMap.sourceOfJsonPointer(jsonPointer)
 
+The following picture demonstrates the difference between 
+`sourceOfJsonPointer` and `sourceOfValueOfJsonPointer` for the example
+JSON Pointer `/bill-to/address`. 
+
+![Difference between sourceOfJsonPointer and sourceOfValueOfJsonPointer
+](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/value-etc.png)
+
+
+If you ask `sourceOfValueOfJsonPointer` for the source of `/bill-to/address` 
+it will return the darker orange range. However `sourceOfJsonPointer` will return
+the darker orange range _plus_ the light orange range, i.e. it will also 
+include the white spaces and the map item's key `address:`.
+
 ### Examples
 
 Have a look at the module `abego-yaml-sourcemap-examples` for some examples how
@@ -100,15 +113,15 @@ implement a "Breadcrumbs bar" (/Navigation bar), e.g. to view YAML/JSON document
 ![Mapping between YAML document text and Data (JSON pointer)
 ](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/breadcrumbs-demo.png)
 
-That application also illustrates what "bidirectional mapping" means: 
+That application also is also a use case for "bidirectional mapping": 
 
 - After a click in the YAML text (the source) the source map is used to find the
 address of the data created by the text at the click location. This address/JSON
-Pointer is then used to update the Breadcrumbs bar.
+Pointer is then used to update the Breadcrumbs bar. _(YAML Text -> Data)_
 - Clicking a breadcrumb in the Breadcrumbs bar navigates the text cursor in the
 YAML text to the location corresponding to that breadcrumb. (Every breadcrumb 
 actually is a JSON Pointer). The source map provides the proper location for
-every given JSON Pointer/breadcrumb.   
+every given JSON Pointer/breadcrumb.  _(Data -> YAML Text)_
  
 [1]: https://tools.ietf.org/html/rfc6901
 
