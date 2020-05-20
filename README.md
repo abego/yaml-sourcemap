@@ -35,14 +35,18 @@ The central type of this module is the YAMLSourceMap.
 You create a YAMLSourceMap for a specific YAML document using the YAMLSourceMapAPI.
 Either you specify a Reader to read the YAML text from:
 
-    Reader reader = ...;
-    YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(reader);
- 
+```java
+Reader reader = ...;
+YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(reader);
+```
+
 or directly pass in the YAML text:
 
-    String yamlText = "foo: 123\nbar: 456\n";
-    YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(yamlText);
- 
+```java
+String yamlText = "foo: 123\nbar: 456\n";
+YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(yamlText);
+``` 
+
 ### Find the data for a YAML/JSON document text location
 
 Once you have the YAMLSourceMap you can pass in a location in the YAML document 
@@ -55,18 +59,22 @@ a specific value in a JSON document.
 You can either specify the location in the YAML text as an offset to the start
 of the text:
 
-    YAMLSourceMap srcMap =...;
+```java
+YAMLSourceMap srcMap =...;
 
-    int offset = 42;
-    String jsonPointer = srcMap.jsonPointerAtOffset(offset); // return e.g. "/bill-to/address"
- 
+int offset = 42;
+String jsonPointer = srcMap.jsonPointerAtOffset(offset); // return e.g. "/bill-to/address"
+``` 
+
 or give the location by line and column. E.g. to get the JSON Pointer for the
 text of column 14 of the third line you would write:
 
-    YAMLSourceMap srcMap =...;
+```java
+YAMLSourceMap srcMap =...;
 
-    String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
- 
+String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
+```
+
 ### Find the YAML/JSON document text that created a data value
 
 To get from some data value to the corresponding YAML document text use 
@@ -75,18 +83,22 @@ Pass in a JSON Pointer and the method gives you the range in the YAML text
 related to the data value. This may also include surrounding whitespaces 
 or comments, or special characters like ":", "[" etc.):
 
-    YAMLSourceMap srcMap =...;
+```java
+YAMLSourceMap srcMap =...;
 
-    String jsonPointer = "/bill-to/address";
-    YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
- 
+String jsonPointer = "/bill-to/address";
+YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
+``` 
+
 If you interested just in the text range that _defines_ the data value 
 you can use the method `YAMLSourceMap.sourceRangeOfJsonPointer(...)`:
 
-    YAMLSourceMap srcMap =...;
+```java
+YAMLSourceMap srcMap =...;
 
-    String jsonPointer = "/bill-to/address";
-    YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
+String jsonPointer = "/bill-to/address";
+YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
+```
 
 The following picture demonstrates the difference between 
 `sourceRangeOfJsonPointer` and `sourceRangeOfValueOfJsonPointer` for the example
