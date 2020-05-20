@@ -1,6 +1,7 @@
 # YAMLSourceMap
 __Map YAML to Data, and Back. In Java.__
 
+[![Build Status](https://travis-ci.com/abego/yaml-sourcemap.svg?branch=master)](https://travis-ci.com/abego/yaml-sourcemap)
 ## Overview
 
 The YAMLSourceMap provides a mapping between locations in a YAML document 
