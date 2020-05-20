@@ -4,7 +4,7 @@ __Map YAML to Data, and Back. In Java.__
 ## Overview
 
 The YAMLSourceMap provides a mapping between locations in a YAML document 
-(the source) and the data values created from this document.
+(the source) and the data values created from the YAML document.
 
 ![Mapping between YAML document text and Data (JSON pointer)
 ](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/mapping.png)
@@ -19,7 +19,8 @@ address (JSON pointer) of the data value this location relates to.
 ### Data (JSON pointer) -> YAML document text
 
 If you have a JSON pointer for some data created from the YAML document 
-the source tells you the locations in the YAML document that created the data.
+the source map tells you the locations in the YAML document that created 
+the data.
 
 ## JSON and YAML
 
@@ -69,39 +70,37 @@ text of column 14 of the third line you would write:
 ### Find the YAML/JSON document text that created a data value
 
 To get from some data value to the corresponding YAML document text use 
-`YAMLSourceMap.sourceOfValueOfJsonPointer(java.lang.String)`.
-Pass in a JSON Pointer and the method gives you the range in the text of 
-YAML/JSON document that created the data value identified by the JSON Pointer:
+`YAMLSourceMap.sourceRangeOfPointer(java.lang.String)`.
+Pass in a JSON Pointer and the method gives you the range in the YAML text 
+related to the data value. This may also include surrounding whitespaces 
+or comments, or special characters like ":", "[" etc.):
 
     YAMLSourceMap srcMap =...;
 
     String jsonPointer = "/bill-to/address";
-    YAMLRange range = srcMap.sourceOfValueOfJsonPointer(jsonPointer)
+    YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
  
-If you interested not just in the text range that created the data value 
-but would like to know the larger range in the YAML text related to the 
-data value (including surrounding whitespace or comments, or special characters 
-like ":", "[" etc.) you can use the method `YAMLSourceMap.sourceOfJsonPointer(...)` instead:
+If you interested just in the text range that _defines_ the data value 
+you can use the method `YAMLSourceMap.sourceRangeOfJsonPointer(...)`:
 
     YAMLSourceMap srcMap =...;
 
     String jsonPointer = "/bill-to/address";
-    YAMLRange range = srcMap.sourceOfJsonPointer(jsonPointer)
+    YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
 
 The following picture demonstrates the difference between 
-`sourceOfJsonPointer` and `sourceOfValueOfJsonPointer` for the example
+`sourceRangeOfJsonPointer` and `sourceRangeOfValueOfJsonPointer` for the example
 JSON Pointer `/bill-to/address`. 
 
-![Difference between sourceOfJsonPointer and sourceOfValueOfJsonPointer
-](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/value-etc.png)
+![Difference between sourceRangeOfJsonPointer and sourceRangeOfValueOfJsonPointer
+](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/source-range.png)
 
 
-If you ask `sourceOfValueOfJsonPointer` for the source of `/bill-to/address` 
-it will return the darker orange range. However `sourceOfJsonPointer` will return
-the darker orange range _plus_ the light orange range, i.e. it will also 
-include the white spaces and the map item's key `address:`.
+As you can see `sourceRangeOfJsonPointer` also includes white spaces 
+and the map item's key "`address:`", but `sourceRangeOfValueOfJsonPointer` 
+just the range directly defining the _value_ for JSON Pointer "`/bill-to/address`".
 
-### Examples
+## Examples
 
 Have a look at the module `abego-yaml-sourcemap-examples` for some examples how
 the YAMLSourceMap can be used in an application.

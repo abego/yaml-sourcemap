@@ -105,26 +105,26 @@
  * <p><em><strong>Find the YAML/JSON document text that created a data value</strong></em></p>
  *
  * <p> For the other direction (Data (JSON pointer) -&gt; YAML document text)
- * you use {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceOfValueOfJsonPointer(java.lang.String)},
+ * you use {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfValueOfJsonPointer(java.lang.String)},
  * pass in a JSON Pointer and get the range in the text of YAML/JSON document
  * that created the data value identified by the JSON Pointer:</p>
  * <pre>
  *    YAMLSourceMap srcMap =...;
  *
  *    String jsonPointer = "/invoice/bill-to/city";
- *    YAMLRange range = srcMap.sourceOfValueOfJsonPointer(jsonPointer)
+ *    YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
  * </pre>
  *
  * <p> If you interested not just in the text range that created the data
  * <em>value</em> but would like to know the larger range in the YAML text
  * related to the data value (including surrounding whitespace or comments,
  * or special characters like ":", "[" etc.) you can use the method
- * {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceOfJsonPointer(java.lang.String)} instead:</p>
+ * {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfJsonPointer(java.lang.String)} instead:</p>
  * <pre>
  *    YAMLSourceMap srcMap =...;
  *
  *    String jsonPointer = "/invoice/bill-to/city";
- *    YAMLRange range = srcMap.sourceOfJsonPointer(jsonPointer)
+ *    YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
  * </pre>
  *
  * <p>[1]: <a href="https://tools.ietf.org/html/rfc6901"

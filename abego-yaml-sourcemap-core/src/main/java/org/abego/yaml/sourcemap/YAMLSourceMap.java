@@ -313,7 +313,7 @@ public interface YAMLSourceMap {
      * <p>The range is empty when the {@code jsonPointer} does not identify data
      * created by the YAML/JSON document.</p>
      *
-     * <p>Other than {@link #sourceOfJsonPointer(String)} this range focuses on
+     * <p>Other than {@link #sourceRangeOfJsonPointer(String)} this range focuses on
      * the part of the YAML/JSON text that defines the data's <em>value</em>.
      * The range does not include parts unrelated to the data's value, like
      * surrounding whitespaces or comments.</p>
@@ -323,7 +323,7 @@ public interface YAMLSourceMap {
      * @return the range in the YAML/JSON document's text that is the source
      * for the data value identified by the {@code jsonPointer}
      */
-    YAMLRange sourceOfValueOfJsonPointer(String jsonPointer);
+    YAMLRange sourceRangeOfValueOfJsonPointer(String jsonPointer);
 
     /**
      * Returns the range in the YAML/JSON document's text that is
@@ -332,7 +332,7 @@ public interface YAMLSourceMap {
      * <p>The range is empty when the {@code jsonPointer} does not identify data
      * created by the YAML/JSON document.</p>
      *
-     * <p>Other than {@link #sourceOfValueOfJsonPointer(String)} this also
+     * <p>Other than {@link #sourceRangeOfValueOfJsonPointer(String)} this also
      * includes parts of the YAML/JSON text that does not define the
      * <em>value</em> for the data. This includes surrounding whitespaces or
      * comments, but also syntactic elements like ":", "[", or "-". For a map
@@ -343,7 +343,7 @@ public interface YAMLSourceMap {
      * @return the range in the YAML/JSON document's text that is
      * related to the data value identified by the {@code jsonPointer}
      */
-    YAMLRange sourceOfJsonPointer(String jsonPointer);
+    YAMLRange sourceRangeOfJsonPointer(String jsonPointer);
 
     // === Fragments API ===================================================
 

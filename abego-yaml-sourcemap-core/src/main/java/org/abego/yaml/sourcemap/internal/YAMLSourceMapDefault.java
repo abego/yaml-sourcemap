@@ -144,7 +144,7 @@ public final class YAMLSourceMapDefault implements YAMLSourceMap {
     }
 
     @Override
-    public YAMLRange sourceOfValueOfJsonPointer(String jsonPointer) {
+    public YAMLRange sourceRangeOfValueOfJsonPointer(String jsonPointer) {
 
         // First try for "scalar" data values
         @Nullable
@@ -159,7 +159,7 @@ public final class YAMLSourceMapDefault implements YAMLSourceMap {
     }
 
     @Override
-    public YAMLRange sourceOfJsonPointer(String jsonPointer) {
+    public YAMLRange sourceRangeOfJsonPointer(String jsonPointer) {
         return createRange(allFragmentsOfJsonPointer(jsonPointer));
     }
 

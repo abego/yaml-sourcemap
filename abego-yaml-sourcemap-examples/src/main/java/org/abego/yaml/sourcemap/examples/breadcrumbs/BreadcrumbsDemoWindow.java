@@ -117,18 +117,18 @@ final class BreadcrumbsDemoWindow extends JFrame {
     private void updateHighlighting() {
         String jsonPointer = getJSONPointerOfYAMLTextSelection();
 
-        highlightValueFragment(jsonPointer);
-        highlightSourceOfJsonPointer(jsonPointer);
+        highlightSourceRangeOfValueOfJsonPointer(jsonPointer);
+        highlightSourceRangeOfJsonPointer(jsonPointer);
     }
 
-    private void highlightSourceOfJsonPointer(String jsonPointer) {
-        YAMLRange range = yamlSourceMap.sourceOfJsonPointer(jsonPointer);
+    private void highlightSourceRangeOfJsonPointer(String jsonPointer) {
+        YAMLRange range = yamlSourceMap.sourceRangeOfJsonPointer(jsonPointer);
         yamlView.highlightRangeAsSelectedEntity(
                 range.getStartOffset(), range.getEndOffset());
     }
 
-    private void highlightValueFragment(String jsonPointer) {
-        YAMLRange range = yamlSourceMap.sourceOfValueOfJsonPointer(jsonPointer);
+    private void highlightSourceRangeOfValueOfJsonPointer(String jsonPointer) {
+        YAMLRange range = yamlSourceMap.sourceRangeOfValueOfJsonPointer(jsonPointer);
         yamlView.highlightRangeAsSelectedValue(
                 range.getStartOffset(), range.getEndOffset());
     }

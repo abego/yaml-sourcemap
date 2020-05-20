@@ -456,7 +456,7 @@ public class YAMLSourceMapTest {
 
 
     @Test
-    void sourceOfJsonPointer() {
+    void sourceRangeOfJsonPointer() {
         String yaml = "\nA:\n  B:\n    C: 9\n    D: 8\nE: 8\n";
         // offsets-----0-123-45678-901234567-89012345-67890
         // ------------0-000-00000-011111111-11222222-22223
@@ -464,14 +464,14 @@ public class YAMLSourceMapTest {
         YAMLSourceMap srcMap = createYAMLSourceMap(yaml);
 
         // scalar value
-        YAMLRange range = srcMap.sourceOfJsonPointer("/A/B/C");
+        YAMLRange range = srcMap.sourceRangeOfJsonPointer("/A/B/C");
 
         assertFalse(range.isEmpty());
         assertRangeEquals(13, 17, range);
         assertEquals("C: 9", range.getRangeText(yaml));
 
         // non-scalar value
-        range = srcMap.sourceOfJsonPointer("/A/B");
+        range = srcMap.sourceRangeOfJsonPointer("/A/B");
 
         assertFalse(range.isEmpty());
         assertRangeEquals(6, 27, range);
@@ -479,13 +479,13 @@ public class YAMLSourceMapTest {
                 range.getRangeText(yaml));
 
         // Undefined value
-        range = srcMap.sourceOfJsonPointer("/foo");
+        range = srcMap.sourceRangeOfJsonPointer("/foo");
 
         assertTrue(range.isEmpty());
     }
 
     @Test
-    void sourceOfValueOfJsonPointer() {
+    void sourceRangeOfValueOfJsonPointer() {
         String yaml = "\nA:\n  B:\n    C: 9\n    D: 8\nE: 8\n";
         // offsets-----0-123-45678-901234567-89012345-67890
         // ------------0-000-00000-011111111-11222222-22223
@@ -493,21 +493,21 @@ public class YAMLSourceMapTest {
         YAMLSourceMap srcMap = createYAMLSourceMap(yaml);
 
         // scalar value
-        YAMLRange range = srcMap.sourceOfValueOfJsonPointer("/A/B/C");
+        YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer("/A/B/C");
 
         assertFalse(range.isEmpty());
         assertRangeEquals(16, 17, range);
         assertEquals("9", range.getRangeText(yaml));
 
         // non-scalar value
-        range = srcMap.sourceOfValueOfJsonPointer("/A/B");
+        range = srcMap.sourceRangeOfValueOfJsonPointer("/A/B");
 
         assertFalse(range.isEmpty());
         assertRangeEquals(13, 26, range);
         assertEquals("C: 9\n    D: 8", range.getRangeText(yaml));
 
         // Undefined value
-        range = srcMap.sourceOfValueOfJsonPointer("/foo");
+        range = srcMap.sourceRangeOfValueOfJsonPointer("/foo");
 
         assertTrue(range.isEmpty());
     }
