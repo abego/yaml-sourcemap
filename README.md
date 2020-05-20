@@ -76,7 +76,7 @@ YAMLSourceMap srcMap =...;
 String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
 ```
 
-### Find the YAML/JSON document text that created a data value
+### <a name="data-to-text"></a>Find the YAML/JSON document text that created a data value
 
 To get from some data value to the corresponding YAML document text use 
 `YAMLSourceMap.sourceRangeOfPointer(java.lang.String)`.
@@ -133,12 +133,18 @@ Pointer is then used to update the Breadcrumbs bar. _(YAML Text -> Data)_
 YAML text to the location corresponding to that breadcrumb. (Every breadcrumb 
 actually is a JSON Pointer). The source map provides the proper location for
 every given JSON Pointer/breadcrumb.  _(Data -> YAML Text)_
+
+BTW: the "Breadcrumbs" application also highlights the source ranges of the 
+YAML entity located at the text cursor position, both the "full" source
+range and the "value" source range. For details on the difference see chapter 
+[Find the YAML/JSON document text that created a data value](#data-to-text).
  
 [1]: https://tools.ietf.org/html/rfc6901
 
 ## Development
 
-You may check out the source code from the [GitHub repository](https://github.com/abego/yaml-sourcemap).
+You may check out the source code from the 
+[GitHub repository](https://github.com/abego/yaml-sourcemap).
 
 ## Links
 
@@ -147,6 +153,7 @@ You may check out the source code from the [GitHub repository](https://github.co
 
 ## License
 
-YAMLSourceMap is available under a business friendly [MIT license](https://www.abego-software.de/legal/mit-license.html).
+YAMLSourceMap is available under a business friendly 
+[MIT license](https://www.abego-software.de/legal/mit-license.html).
 
 
