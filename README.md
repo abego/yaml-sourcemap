@@ -123,7 +123,7 @@ implement a "Breadcrumbs bar" (/Navigation bar), e.g. to view YAML/JSON document
 ![Mapping between YAML document text and Data (JSON pointer)
 ](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/breadcrumbs-demo.png)
 
-That application also is also a use case for "bidirectional mapping": 
+That application is also a use case for "bidirectional mapping": 
 
 - After a click in the YAML text (the source) the source map is used to find the
 address of the data created by the text at the click location. This address/JSON
