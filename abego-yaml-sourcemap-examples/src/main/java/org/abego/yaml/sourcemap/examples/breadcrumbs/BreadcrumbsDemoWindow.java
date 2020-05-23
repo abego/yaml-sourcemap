@@ -24,9 +24,9 @@
 
 package org.abego.yaml.sourcemap.examples.breadcrumbs;
 
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
 import org.abego.yaml.sourcemap.YAMLRange;
 import org.abego.yaml.sourcemap.YAMLSourceMap;
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment;
 import org.abego.yaml.sourcemap.YAMLSourceMapAPI;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -128,7 +128,8 @@ final class BreadcrumbsDemoWindow extends JFrame {
     }
 
     private void highlightSourceRangeOfValueOfJsonPointer(String jsonPointer) {
-        YAMLRange range = yamlSourceMap.sourceRangeOfValueOfJsonPointer(jsonPointer);
+        YAMLRange range = yamlSourceMap
+                .sourceRangeOfValueOfJsonPointer(jsonPointer);
         yamlView.highlightRangeAsSelectedValue(
                 range.getStartOffset(), range.getEndOffset());
     }

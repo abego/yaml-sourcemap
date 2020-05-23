@@ -24,8 +24,8 @@
 
 package org.abego.yaml.sourcemap;
 
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment;
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind;
 import org.eclipse.jdt.annotation.Nullable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,9 +33,9 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.DOCUMENT_END;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.DOCUMENT_START;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SCALAR_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.DOCUMENT_END;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.DOCUMENT_START;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SCALAR_VALUE;
 import static org.abego.yaml.sourcemap.YAMLSourceMapAPI.createYAMLSourceMap;
 import static org.abego.yaml.sourcemap.YAMLSourceMapAPITest.toTSV;
 import static org.junit.jupiter.api.Assertions.assertEquals;

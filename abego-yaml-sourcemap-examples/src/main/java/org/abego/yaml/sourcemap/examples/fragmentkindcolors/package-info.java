@@ -26,7 +26,7 @@
  * <strong>Fragment Kind Color Coding</strong>
  *
  * <p>The application visualizes the different
- * {@link org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind}s by color
+ * {@link org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind}s by color
  * coding the fragments of a YAML/JSON text according to the fragment's kind.
  * </p>
  *
@@ -34,7 +34,7 @@
  * <p>The colors have the following meaning:</p>
  * <img src="doc-files/fragment-kind-color-codes.png" alt="The color codes explained">
  *
- * <p>See also {@link org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind}.</p>
+ * <p>See also {@link org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind}.</p>
  */
 @NonNullByDefault
 package org.abego.yaml.sourcemap.examples.fragmentkindcolors;

@@ -24,14 +24,14 @@
 
 package org.abego.yaml.sourcemap.internal;
 
-import org.abego.yaml.sourcemap.YAMLSourceMap;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
 import org.yaml.snakeyaml.error.Mark;
 
 /**
- * An implementation of {@link YAMLSourceMap.Fragment}, using SnakeYaml's
+ * An implementation of {@link Fragment}, using SnakeYaml's
  * {@link Mark} object to track the start and end of the fragment.
  */
-final class YAMLFragment implements YAMLSourceMap.Fragment {
+final class YAMLFragment implements Fragment {
     private final Kind kind;
     private final Mark startMark;
     private Mark endMark;

@@ -24,8 +24,7 @@
 
 package org.abego.yaml.sourcemap.internal;
 
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment;
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind;
 import org.abego.yaml.sourcemap.YAMLSourceMapException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.yaml.snakeyaml.error.Mark;
@@ -40,16 +39,16 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.ALIAS_AS_MAP_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.ALIAS_AS_SEQUENCE_ITEM;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.MAP_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SCALAR_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SEQUENCE_ITEM;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.ALIAS_AS_MAP_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.ALIAS_AS_SEQUENCE_ITEM;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.MAP_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SCALAR_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SEQUENCE_ITEM;
 import static org.abego.yaml.sourcemap.internal.Utils.last;
 
 /**
- * Provides the {@link org.abego.yaml.sourcemap.YAMLSourceMap.Fragment}s for
- * a YAML document.
+ * Provides the {@link Fragment}s for a YAML document.
  *
  * <p>For details regarding fragments and how they relate to the YAML Source Map
  * see {@link org.abego.yaml.sourcemap.YAMLSourceMap}.</p>

@@ -24,7 +24,7 @@
 
 package org.abego.yaml.sourcemap;
 
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
 import org.abego.yaml.sourcemap.internal.YAMLSourceMapDefault;
 
 import java.io.PrintWriter;

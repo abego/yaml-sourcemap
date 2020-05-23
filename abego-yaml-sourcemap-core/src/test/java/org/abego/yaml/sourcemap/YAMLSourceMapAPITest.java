@@ -24,6 +24,7 @@
 
 package org.abego.yaml.sourcemap;
 
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -44,7 +45,7 @@ class YAMLSourceMapAPITest {
         return writer.toString();
     }
 
-    static String toTSV(Iterable<YAMLSourceMap.Fragment> fragments) {
+    static String toTSV(Iterable<Fragment> fragments) {
         StringWriter writer = new StringWriter();
         YAMLSourceMapAPI.writeTSV(fragments, writer);
         return writer.toString();

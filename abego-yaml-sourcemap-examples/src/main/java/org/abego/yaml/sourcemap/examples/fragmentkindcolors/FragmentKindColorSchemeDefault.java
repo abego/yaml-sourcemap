@@ -1,6 +1,6 @@
 package org.abego.yaml.sourcemap.examples.fragmentkindcolors;
 
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind;
 
 import java.awt.Color;
 

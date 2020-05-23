@@ -1,23 +1,24 @@
 package org.abego.yaml.sourcemap.examples.fragmentkindcolors;
 
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment;
+import org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind;
 import org.abego.yaml.sourcemap.YAMLSourceMap;
-import org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind;
 import org.abego.yaml.sourcemap.YAMLSourceMapAPI;
 
 import java.awt.Color;
 
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.ALIAS_AS_MAP_KEY;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.ALIAS_AS_MAP_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.ALIAS_AS_SEQUENCE_ITEM;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.DOCUMENT_END;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.DOCUMENT_START;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.MAP;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.MAP_KEY;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.MAP_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SCALAR;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SCALAR_VALUE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SEQUENCE;
-import static org.abego.yaml.sourcemap.YAMLSourceMap.Fragment.Kind.SEQUENCE_ITEM;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.ALIAS_AS_MAP_KEY;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.ALIAS_AS_MAP_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.ALIAS_AS_SEQUENCE_ITEM;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.DOCUMENT_END;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.DOCUMENT_START;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.MAP;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.MAP_KEY;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.MAP_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SCALAR;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SCALAR_VALUE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SEQUENCE;
+import static org.abego.yaml.sourcemap.FragmentsAPI.Fragment.Kind.SEQUENCE_ITEM;
 
 final class FragmentKindColorCoding {
     private final FragmentKindColorScheme colorScheme;
@@ -31,7 +32,7 @@ final class FragmentKindColorCoding {
                 YAMLSourceMapAPI.createYAMLSourceMap(yamlText);
 
         // construct the text fragment by fragment
-        for (YAMLSourceMap.Fragment f : yamlSourceMap.allFragments()) {
+        for (Fragment f : yamlSourceMap.allFragments()) {
             Color color = colorScheme.getColor(f.getKind());
             String fragmentText = yamlText.substring(
                     f.getStartOffset(), f.getEndOffset());
