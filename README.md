@@ -152,7 +152,8 @@ Typically, a given JSON pointer relates to multiple fragments,
 of different kinds. E.g. in the picture above the first three
 green fragments all map to JSON pointer `/invoice`.
 
-For more details please see the JavaDoc of the FragmentAPI.
+For more details please see the JavaDoc of the FragmentAPI or 
+the `FragmentKindColorCodingApp` in the examples.
  
 ## Examples
 
