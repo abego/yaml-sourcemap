@@ -148,7 +148,7 @@ relate to (a sample) YAML text.
 ![Fragment Kinds and how they relate to YAML text
 ](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/fragment-kind-and-legend.png)
 
-Typically a given JSON pointer relates to multiple fragments, 
+Typically, a given JSON pointer relates to multiple fragments, 
 of different kinds. E.g. in the picture above the first three
 green fragments all map to JSON pointer `/invoice`.
 
