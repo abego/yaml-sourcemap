@@ -53,25 +53,6 @@ public interface YAMLSourceMap extends FragmentsAPI {
     String jsonPointerAtLocation(int line, int column);
 
     /**
-     * Returns the range in the YAML/JSON document's text that is the source
-     * for the data value identified by the {@code jsonPointer}.
-     *
-     * <p>The range is empty when the {@code jsonPointer} does not identify data
-     * created by the YAML/JSON document.</p>
-     *
-     * <p>Other than {@link #sourceRangeOfJsonPointer(String)} this range focuses on
-     * the part of the YAML/JSON text that defines the data's <em>value</em>.
-     * The range does not include parts unrelated to the data's value, like
-     * surrounding whitespaces or comments.</p>
-     *
-     * @param jsonPointer A JSON Pointer for a data value created by this source
-     *                    map's YAML/JSON document
-     * @return the range in the YAML/JSON document's text that is the source
-     * for the data value identified by the {@code jsonPointer}
-     */
-    YAMLRange sourceRangeOfValueOfJsonPointer(String jsonPointer);
-
-    /**
      * Returns the range in the YAML/JSON document's text that is
      * related to the data value identified by the {@code jsonPointer}.
      *
@@ -90,5 +71,24 @@ public interface YAMLSourceMap extends FragmentsAPI {
      * related to the data value identified by the {@code jsonPointer}
      */
     YAMLRange sourceRangeOfJsonPointer(String jsonPointer);
+
+    /**
+     * Returns the range in the YAML/JSON document's text that is the source
+     * for the data value identified by the {@code jsonPointer}.
+     *
+     * <p>The range is empty when the {@code jsonPointer} does not identify data
+     * created by the YAML/JSON document.</p>
+     *
+     * <p>Other than {@link #sourceRangeOfJsonPointer(String)} this range focuses on
+     * the part of the YAML/JSON text that defines the data's <em>value</em>.
+     * The range does not include parts unrelated to the data's value, like
+     * surrounding whitespaces or comments.</p>
+     *
+     * @param jsonPointer A JSON Pointer for a data value created by this source
+     *                    map's YAML/JSON document
+     * @return the range in the YAML/JSON document's text that is the source
+     * for the data value identified by the {@code jsonPointer}
+     */
+    YAMLRange sourceRangeOfValueOfJsonPointer(String jsonPointer);
 
 }

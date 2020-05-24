@@ -24,7 +24,7 @@ public interface FragmentsAPI {
          *
          * <p>Beside the kinds known from the JSON data model
          * ({@link Kind#SCALAR}, {@link Kind#SEQUENCE}, {@link Kind#MAP})
-         * others exist that refine these kind, to cover "sub aspects". E.g. for
+         * other kinds exist that refine these basic kinds, to cover "sub aspects". E.g. for
          * a map the kinds {@link Kind#MAP_KEY} and {@link Kind#MAP_VALUE}
          * define subranges within the map entry's definition.</p>
          *

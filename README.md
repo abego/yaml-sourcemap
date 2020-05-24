@@ -48,7 +48,9 @@ String yamlText = "foo: 123\nbar: 456\n";
 YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(yamlText);
 ``` 
 
-### Find the data for a YAML/JSON document text location
+### The Basic Use Cases
+
+#### Find the data for a YAML/JSON document text location (Text location -> Data)
 
 Once you have the YAMLSourceMap you can pass in a location in the YAML document 
 text and the source map gives you the address of the data (value) the text 
@@ -76,7 +78,7 @@ YAMLSourceMap srcMap =...;
 String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
 ```
 
-### <a name="data-to-text"></a>Find the YAML/JSON document text that created a data value
+#### <a name="data-to-text"></a>Find the YAML/JSON document text that created a data value  (Data -> Text location)
 
 To get from some data value to the corresponding YAML document text use 
 `YAMLSourceMap.sourceRangeOfPointer(java.lang.String)`.
@@ -113,6 +115,45 @@ As you can see `sourceRangeOfJsonPointer` also includes white spaces
 and the map item's key "`address:`", but `sourceRangeOfValueOfJsonPointer` 
 just the range directly defining the _value_ for JSON Pointer "`/bill-to/address`".
 
+### The Fragments API
+
+The methods `jsonPointerAtOffset`, `jsonPointerAtLocation` 
+`sourceRangeOfJsonPointer`, and `sourceRangeOfValueOfJsonPointer` cover 
+the basic use cases you may want to use a YAMLSourceMap for.
+
+In addition the YAMLSourceMap also provides the `FragmentsAPI` that
+gives you a more detailed mapping between the YAML text and its data. 
+As the name suggests the central idea here are "fragments".
+
+Fragments partition the whole YAML text into non-overlapping ranges.
+Each fragment covers a range of characters that share the same data (address), 
+i.e. the same JSON pointer. Additionally, a fragment is of a certain kind that
+describes what sort of elements in the YAML document a fragment related to.
+
+Beside the kinds known from the JSON data model (scalar, sequence, map)
+other kinds exist that refine these basic kinds, to cover "sub aspects". 
+E.g. for a map the kinds `MAP_KEY` and `MAP_VALUE` define subranges within 
+the map entry's definition.
+
+This additional information gives you many options for your applications.
+E.g. assume you want to use a YAMLSourceMap to implement some content 
+assist feature when editing a YAML document. With the fragments it is easy
+to display different assists e.g. for the key vs. the value of a map item.
+Or you can even show different assists depending on where in a map's key
+the user has the text cursor.
+ 
+The following picture shows the available fragment kinds and how they
+relate to (a sample) YAML text.
+
+![Fragment Kinds and how they relate to YAML text
+](abego-yaml-sourcemap-core/src/main/javadoc/org/abego/yaml/sourcemap/doc-files/fragment-kind-and-legend.png)
+
+Typically a given JSON pointer relates to multiple fragments, 
+of different kinds. E.g. in the picture above the first three
+green fragments all map to JSON pointer `/invoice`.
+
+For more details please see the JavaDoc of the FragmentAPI.
+ 
 ## Examples
 
 Have a look at the module `abego-yaml-sourcemap-examples` for some examples how
