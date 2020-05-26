@@ -121,13 +121,13 @@ The methods `jsonPointerAtOffset`, `jsonPointerAtLocation`
 `sourceRangeOfJsonPointer`, and `sourceRangeOfValueOfJsonPointer` cover 
 the basic use cases you may want to use a YAMLSourceMap for.
 
-In addition the YAMLSourceMap also provides the `FragmentsAPI` that
+In addition, the YAMLSourceMap also provides the `FragmentsAPI` that
 gives you a more detailed mapping between the YAML text and its data. 
 As the name suggests the central idea here are "fragments".
 
 Fragments partition the whole YAML text into non-overlapping ranges.
 Each fragment covers a range of characters that share the same data (address), 
-i.e. the same JSON pointer. Additionally, a fragment is of a certain kind that
+i.e. the same JSON pointer. Additionally, a fragment is of a certain kind
 describes what sort of elements in the YAML document a fragment related to.
 
 Beside the kinds known from the JSON data model (scalar, sequence, map)
