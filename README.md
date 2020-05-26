@@ -168,13 +168,14 @@ implement a "Breadcrumbs bar" (/Navigation bar), e.g. to view YAML/JSON document
 
 That application is also a use case for "bidirectional mapping": 
 
-- After a click in the YAML text (the source) the source map is used to find the
-address of the data created by the text at the click location. This address/JSON
-Pointer is then used to update the Breadcrumbs bar. _(YAML Text -> Data)_
+- After a click in the YAML text (the source) the source map provides the
+address of the data created by the text at the click location. The Breadcrumbs 
+bar then displays the parts of this address/JSON Pointer as breadcrumbs. 
+_(YAML Text -> Data)_
 - Clicking a breadcrumb in the Breadcrumbs bar navigates the text cursor in the
 YAML text to the location corresponding to that breadcrumb. (Every breadcrumb 
 actually is a JSON Pointer). The source map provides the proper location for
-every given JSON Pointer/breadcrumb.  _(Data -> YAML Text)_
+every given JSON Pointer/breadcrumb. _(Data -> YAML Text)_
 
 BTW: the "Breadcrumbs" application also highlights the source ranges of the 
 YAML entity located at the text cursor position, both the "full" source
