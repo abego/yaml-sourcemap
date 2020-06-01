@@ -119,7 +119,7 @@ just the range directly defining the _value_ for JSON Pointer "`/bill-to/address
 
 The methods `jsonPointerAtOffset`, `jsonPointerAtLocation` 
 `sourceRangeOfJsonPointer`, and `sourceRangeOfValueOfJsonPointer` cover 
-the basic use cases you may want to use a YAMLSourceMap for.
+the basic cases you may want to use a YAMLSourceMap for.
 
 In addition, the YAMLSourceMap also provides the `FragmentsAPI` that
 gives you a more detailed mapping between the YAML text and its data. 
