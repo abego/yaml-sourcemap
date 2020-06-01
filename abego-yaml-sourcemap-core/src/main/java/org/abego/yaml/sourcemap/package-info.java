@@ -34,7 +34,7 @@
  *
  * <p><img src="doc-files/mapping.png"
  * alt="Mapping between YAML document text and Data (JSON pointer)"
- * style="width=40em"></p>
+ * style="width: 40em"></p>
  *
  * <p>The mapping is in both directions:</p>
  * <ul>
