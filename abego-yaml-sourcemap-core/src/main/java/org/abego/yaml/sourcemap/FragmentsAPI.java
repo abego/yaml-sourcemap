@@ -5,6 +5,40 @@ import org.eclipse.jdt.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * The FragmentsAPI provides a fine-grained mapping between the YAML text
+ * and its data.
+ * 
+ * <p>As the name suggests the central idea here are "fragments".</p>
+ *
+ * <p>Fragments partition the whole YAML text into non-overlapping ranges.
+ * Each fragment covers a range of characters that share the same data (address),
+ * i.e. the same JSON pointer. Additionally, a fragment is of a certain kind
+ * describes what sort of elements in the YAML document a fragment related to.</p>
+ *
+ * <p>Beside the kinds known from the JSON data model (scalar, sequence, map)
+ * other kinds exist that refine these basic kinds, to cover "sub aspects".
+ * E.g. for a map the kinds `MAP_KEY` and `MAP_VALUE` define subranges within
+ * the map entry's definition.</p>
+ *
+ * <p>This additional information gives you many options for your applications.
+ * E.g. assume you want to use a YAMLSourceMap to implement some content
+ * assist feature when editing a YAML document. With the fragments it is easy
+ * to display different assists e.g. for the key vs. the value of a map item.
+ * Or you can even show different assists depending on where in a map's key
+ * the user has the text cursor.</p>
+ *
+ * <p>The following picture shows the available fragment kinds and how they
+ * relate to (a sample) YAML text.</p>
+ *
+ *  <p><img src="doc-files/fragment-kind-and-legend.png"
+ *  alt="Fragment Kinds and how they relate to YAML text"
+ *  style="width: 30em"></p>
+ *
+ * <p>Typically, a given JSON pointer relates to multiple fragments,
+ * of different kinds. E.g. in the picture above the first three
+ * green fragments all map to JSON pointer {@code /invoice}.</p>
+ */
 public interface FragmentsAPI {
     /**
      * A range of characters in a YAML document's text that shares the same

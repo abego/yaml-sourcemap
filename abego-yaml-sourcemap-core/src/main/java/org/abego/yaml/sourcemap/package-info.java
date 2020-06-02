@@ -24,7 +24,7 @@
 
 /**
  * Java library to map between YAML/JSON document texts and data values in
- * Java, in both directions.
+ * Java, in both directions. 
  *
  * <p><strong>Overview </strong></p>
  *
@@ -79,54 +79,67 @@
  *
  * <p>Once you have the YAMLSourceMap you can pass in a location in the YAML
  * document text and the source map will give you the address of the data (value)
- * the text at the given location in the YAML document created. The data address
- * is given as a JSON Pointer [1], a standard format to identify a specific
- * value in a JSON document.</p>
+ * the text at the given location in the YAML document created. </p>
+ * 
+ * <p>The data address is given as a JSON Pointer [1], a standard format to identify 
+ * a specific value in a JSON document.</p>
+ * 
+ * <p>You can either specify the location in the YAML text as an offset to the start
+ * of the text:</p>
  * <pre>
  *    YAMLSourceMap srcMap =...;
  *
- *    // get the JSON Pointer for the YAML text at a given offset (here offset 42)
- *    String jsonPointer = srcMap.jsonPointerAtOffset(42);
- *    // returns something like "/invoice/bill-to/city"
+ *    int offset = 42;
+ *    String jsonPointer = srcMap.jsonPointerAtOffset(offset); // return e.g. "/bill-to/address" 
  * </pre>
- * or
+ * or give the location by line and column. E.g. to get the JSON Pointer for the
+ * text of column 14 of the third line you would write:
  * <pre>
  *    YAMLSourceMap srcMap =...;
  *
- *    // get the JSON Pointer for the YAML text at a location given by
- *    // line and column (here the column 14 of of the third line)
- *    String jsonPointer = srcMap.jsonPointerAtLocation(3, 14);
- *    // returns something like "/invoice/bill-to/city"
+ *    String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
  * </pre>
  *
  * <p>This is how you get the mapping from YAML document text -&gt; Data
  * (JSON pointer).</p>
  *
- * <p><em><strong>Find the YAML/JSON document text that created a data value</strong></em></p>
+ * <p><em><strong>Find the YAML/JSON document text that created a data value (Data -&gt; Text location)</strong></em></p>
  *
- * <p> For the other direction (Data (JSON pointer) -&gt; YAML document text)
- * you use {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfValueOfJsonPointer(java.lang.String)},
- * pass in a JSON Pointer and get the range in the text of YAML/JSON document
- * that created the data value identified by the JSON Pointer:</p>
+ * <p> To get from some data value to the corresponding YAML document text use 
+ * {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfJsonPointer(java.lang.String)}.
+ * Pass in a JSON Pointer and the method gives you the range in the YAML text 
+ * related to the data value. This may also include surrounding whitespaces 
+ * or comments, or special characters like ":", "[" etc.):</p>
  * <pre>
  *    YAMLSourceMap srcMap =...;
  *
- *    String jsonPointer = "/invoice/bill-to/city";
- *    YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
+ *    String jsonPointer = "/bill-to/address";
+ *    YAMLRange range = srcMap.sourceRangeOfPointer(jsonPointer);
  * </pre>
  *
- * <p> If you interested not just in the text range that created the data
- * <em>value</em> but would like to know the larger range in the YAML text
- * related to the data value (including surrounding whitespace or comments,
- * or special characters like ":", "[" etc.) you can use the method
- * {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfJsonPointer(java.lang.String)} instead:</p>
+ * <p> If you interested just in the text range that <em>defines</em> the data value 
+ * you can use the method {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfValueOfJsonPointer(java.lang.String)}:
+ * </p>
  * <pre>
- *    YAMLSourceMap srcMap =...;
- *
- *    String jsonPointer = "/invoice/bill-to/city";
- *    YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
+ *     YAMLSourceMap srcMap =...;
+ *     
+ *     String jsonPointer = "/bill-to/address";
+ *     YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer);
  * </pre>
+ * 
+ * <p>The following picture demonstrates the difference between 
+ * {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfJsonPointer(java.lang.String)}
+ * and {@link org.abego.yaml.sourcemap.YAMLSourceMap#sourceRangeOfValueOfJsonPointer(java.lang.String)} 
+ * for the example JSON Pointer {@code /bill-to/address}.</p>
  *
+ <p><img src="doc-files/source-range.png"
+ * alt="Difference between sourceRangeOfJsonPointer and sourceRangeOfValueOfJsonPointer"
+ * style="width: 40em"></p>
+ *
+ * <p>As you can see {@code sourceRangeOfJsonPointer} also includes white spaces 
+ * and the map item's key "{@code address:}", but {@code sourceRangeOfValueOfJsonPointer} 
+ * just the range directly defining the <em>value</em> for JSON Pointer "{@code /bill-to/address}".</p>
+ * 
  * <p>[1]: <a href="https://tools.ietf.org/html/rfc6901"
  * >https://tools.ietf.org/html/rfc6901</a></p>
  */

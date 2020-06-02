@@ -52,9 +52,9 @@ YAMLSourceMap srcMap = YAMLSourceMapAPI.createYAMLSourceMap(yamlText);
 
 #### Find the data for a YAML/JSON document text location (Text location -> Data)
 
-Once you have the YAMLSourceMap you can pass in a location in the YAML document 
-text and the source map gives you the address of the data (value) the text 
-at the given location in the YAML document created.
+Once you have the YAMLSourceMap you can pass in a location in the YAML 
+document text and the source map gives you the address of the data (value) 
+the text at the given location in the YAML document created.
  
 The data address is given as a JSON Pointer [1], a standard format to identify 
 a specific value in a JSON document.
@@ -78,7 +78,7 @@ YAMLSourceMap srcMap =...;
 String jsonPointer = srcMap.jsonPointerAtLocation(3, 14); // return e.g. "/bill-to/address"
 ```
 
-#### <a name="data-to-text"></a>Find the YAML/JSON document text that created a data value  (Data -> Text location)
+#### <a name="data-to-text"></a>Find the YAML/JSON document text that created a data value (Data -> Text location)
 
 To get from some data value to the corresponding YAML document text use 
 `YAMLSourceMap.sourceRangeOfPointer(java.lang.String)`.
@@ -90,17 +90,17 @@ or comments, or special characters like ":", "[" etc.):
 YAMLSourceMap srcMap =...;
 
 String jsonPointer = "/bill-to/address";
-YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer)
+YAMLRange range = srcMap.sourceRangeOfPointer(jsonPointer);
 ``` 
 
 If you interested just in the text range that _defines_ the data value 
-you can use the method `YAMLSourceMap.sourceRangeOfJsonPointer(...)`:
+you can use the method `YAMLSourceMap.sourceRangeOfValueOfJsonPointer(...)`:
 
 ```java
 YAMLSourceMap srcMap =...;
 
 String jsonPointer = "/bill-to/address";
-YAMLRange range = srcMap.sourceRangeOfJsonPointer(jsonPointer)
+YAMLRange range = srcMap.sourceRangeOfValueOfJsonPointer(jsonPointer);
 ```
 
 The following picture demonstrates the difference between 
