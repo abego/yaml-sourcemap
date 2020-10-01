@@ -45,9 +45,10 @@
 
 # ====== Configure for project ============================================
 
-projectName="abego-yaml-sourcemap"
-mainModuleId="abego-yaml-sourcemap-core"
 githubProject="yaml-sourcemap"
+groupPath="org/abego/yaml"
+moduleId1="abego-yaml-sourcemap-core"
+moduleId2="abego-yaml-sourcemap-examples"
 # Make sure also to update 'misc/updateversions' when modules are added or removed
 
 
@@ -140,16 +141,18 @@ echo "Automatic part of releasing ${version} completed."
 
 # --- get the path to the local Maven repository --------------------------
 m2repoDir=`mvn help:evaluate -Dexpression=settings.localRepository | grep -E '^([a-zA-Z]:|/)'`
-m2releaseDir="${m2repoDir}/org/abego/${projectName}/${mainModuleId}/${version}/"
+m2releaseDir1="${m2repoDir}/${groupPath}/${moduleId1}/${version}/"
+m2releaseDir2="${m2repoDir}/${groupPath}/${moduleId2}/${version}/"
 
 echo
 echo "    Remaining manual steps:"
 echo "        - on https://github.com/abego/${githubProject}/releases"
-echo "           - Create a new release ${version}"
+echo "           - Create ('Draft') a new release ${version}"
 echo "           - Copy the CHANGELOG entry for ${version} to the server"
 echo "           - Add all files from local Maven repo to release on GitHub"
 
 read -p "Press Return to open GitHub, CHANGELOG and local Maven repo directory:"
-open "${m2releaseDir}"
+open "${m2releaseDir2}"
+open "${m2releaseDir1}" # open the "most important" module last, to make it the topmost window
 open "CHANGELOG.md"
 open "https://github.com/abego/${githubProject}/releases"
