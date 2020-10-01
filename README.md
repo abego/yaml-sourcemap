@@ -195,11 +195,11 @@ add the following to the <dependencies> element in your pom.xml file.
 <dependency>
     <artifactId>abego-yaml-sourcemap-core</artifactId>
     <groupId>org.abego.yaml</groupId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
-__Download:__ https://github.com/abego/yaml-sourcemap/releases/tag/v1.0.0
+__Download:__ https://github.com/abego/yaml-sourcemap/releases/tag/v1.0.1
 
 ## Development
 
