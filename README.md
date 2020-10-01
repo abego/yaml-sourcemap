@@ -184,6 +184,23 @@ range and the "value" source range. For details on the difference see chapter
  
 [1]: https://tools.ietf.org/html/rfc6901
 
+## Installation
+
+__Maven:__
+
+To use YAMLSourceMap in a project built with Maven, 
+add the following to the <dependencies> element in your pom.xml file.
+
+```
+<dependency>
+    <artifactId>abego-yaml-sourcemap-core</artifactId>
+    <groupId>org.abego.yaml</groupId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+__Download:__ https://github.com/abego/yaml-sourcemap/releases/tag/v1.0.0
+
 ## Development
 
 You may check out the source code from the 
