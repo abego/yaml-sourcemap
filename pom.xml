@@ -1,21 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2019 Udo Borkowski, (ub@abego.org)
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.abego.yaml</groupId>
     <artifactId>abego-yaml-sourcemap</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>abego YAML Source Map (Parent)</name>
+    <description>YAMLSourceMap - Map YAML to Data, and Back. In Java.</description>
+    <url>https://github.com/abego/yaml-sourcemap</url>
     <inceptionYear>2020</inceptionYear>
+    <organization>
+        <name>abego Software GmbH, Germany</name>
+        <url>http://abego-software.de</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.abego-software.de/legal/mit-license.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>ub</id>
+            <name>Udo Borkowski</name>
+            <email>ub@abego.org</email>
+            <organization>abego Software GmbH, Germany</organization>
+            <organizationUrl>http://abego-software.de</organizationUrl>
+        </developer>
+    </developers>
 
     <modules>
         <module>abego-yaml-sourcemap-core</module>
         <module>abego-yaml-sourcemap-examples</module>
     </modules>
 
+    <scm>
+        <url>https://github.com/abego/yamlsourcemap</url>
+        <connection>scm:https://github.com/abego/yamlsourcemap.git</connection>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/abego/yaml-sourcemap/issues</url>
+    </issueManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <mockito-core.version>3.1.0</mockito-core.version>
+        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <org.eclipse.jdt.annotation.version>2.2.100</org.eclipse.jdt.annotation.version>
+        <pitest-junit5-plugin.version>0.7</pitest-junit5-plugin.version>
+        <pitest-maven.version>1.4.2</pitest-maven.version>
+        <snakeyaml.version>1.26</snakeyaml.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
@@ -30,64 +129,6 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>https://www.abego-software.de/legal/mit-license.html</url>
-        </license>
-    </licenses>
-
-    <scm>
-        <url>https://github.com/abego/yamlsourcemap</url>
-        <connection>scm:https://github.com/abego/yamlsourcemap.git</connection>
-    </scm>
-
-    <developers>
-        <developer>
-            <id>ub</id>
-            <name>Udo Borkowski</name>
-            <email>ub@abego.org</email>
-            <organization>abego Software GmbH, Germany</organization>
-            <organizationUrl>http://abego-software.de</organizationUrl>
-        </developer>
-    </developers>
-
-    <organization>
-        <name>abego Software GmbH, Germany</name>
-        <url>http://abego-software.de</url>
-    </organization>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-
-        <build.timestamp>${maven.build.timestamp}</build.timestamp>
-
-        <junit-jupiter.version>5.5.2</junit-jupiter.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <mockito-core.version>3.1.0</mockito-core.version>
-        <org.eclipse.jdt.annotation.version>2.2.100</org.eclipse.jdt.annotation.version>
-        <pitest-junit5-plugin.version>0.7</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.4.2</pitest-maven.version>
-        <snakeyaml.version>1.26</snakeyaml.version>
-    </properties>
 
     <build>
         <plugins>
@@ -124,8 +165,44 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit-platform-surefire-provider.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>${junit-jupiter.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven-gpg-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${nexus-staging-maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
@@ -139,6 +216,38 @@
                 </dependencies>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- see https://stackoverflow.com/a/13043842
+                         "How to eliminate the “maven-enforcer-plugin (goal ”enforce“) is ignored by m2e” warning by eclipse?" -->
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-enforcer-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>enforce</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
 
 </project>
