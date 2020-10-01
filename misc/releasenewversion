@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+# MIT License
+#
+# Copyright (c) 2020 Udo Borkowski, (ub@abego.org)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
+# =========================================================================
+# Release a new version to GitHub and Maven Central
+#
+# Usage: releasenewversion <version> <nextVersion>"
+#
+#   version     the version to release (e.g. 0.10.0)
+#   nextVersion the next development is targeting
+#               after this release (e.g. 0.11.0)
+#               (don't include the '-SNAPSHOT' in the version)
+#
+#
+# Preconditions:
+# - a README.md file exists with
+#   - a single Maven 'dependency' block, refering this project's main artefact.
+#     The "<version>...</version>" tag must be on a separate line.
+#   - a link to the downloadable jar in the form
+#        https://github.com/abego/$|githubProject}/releases/tag/vX.Y.Z
+#
+# =========================================================================
+
+
+# ====== Configure for project ============================================
+
+projectName="abego-yaml-sourcemap"
+mainModuleId="abego-yaml-sourcemap-core"
+githubProject="yaml-sourcemap"
+# Make sure also to update 'misc/updateversions' when modules are added or removed
+
+
+# ====== Check Preconditions ==============================================
+
+# --- Get and check the arguments -----------------------------------------
+if [ "$#" -ne 2 ]; then
+    echo "Usage: releasenewversion <version> <nextVersion>"
+    echo
+    echo "          version     the version to release (e.g. 0.10.0)"
+    echo "          nextVersion the next development is targeting after this release (e.g. 0.11.0)"
+    echo "                      (don't include the '-SNAPSHOT' in the version)"
+    exit 1
+fi
+version="$1"
+nextVersion="$2"
+
+# --- Checking Git stuff --------------------------------------------------
+echo "Checking Git status... "
+
+# Make sure you are on the `master` branch.
+branchname=`git rev-parse --abbrev-ref HEAD`
+if [ "${branchname}" != "master" ]; then
+   echo "You are not on the 'master' branch."
+   exit 1
+fi
+
+# --- Must not have uncommited changes ------------------------------------
+if ! output=$(git status --porcelain) || ! [ -z "$output" ]; then
+   echo "Uncommited changes detected."
+   exit 1
+fi
+
+# --- Make sure the "CHANGELOG.md" was updated ----------------------------
+while true; do
+    read -p "Have you updated the CHANGELOG.md to cover all changes for this release?" yn
+    case ${yn} in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+# --- Check of the current code runs without errors -----------------------
+echo "Testing current code..."
+mvn clean test
+if [ $? -ne 0 ]; then
+    echo "The current code does not run without errors. Not released."
+    exit 1
+fi
+
+# ====== Perform the actual Release =======================================
+
+# --- update README to new version ----------------------------------------
+
+echo Updating README.md ...
+sed -i '' "s|<version>.*</version>|<version>${version}</version>|" README.md
+sed -i '' "s|https://github.com/abego/${githubProject}/releases/tag/.*|https://github.com/abego/${githubProject}/releases/tag/v${version}|" README.md
+
+# --- update pom.xml files to new version ---------------------------------
+echo Updating pom.xml files ...
+misc/updateversions "${version}"
+
+# --- Do the Git stuff  ---------------------------------------------------
+echo "Pushing changes to Git server..."
+git add .
+git commit -m "Release ${version}"
+git tag "v${version}" # tag the commit as `vx.y.z` (e.g. "`v0.10.0`")
+git push origin "v${version}" #o push the changes to the Git server, incl. tag.
+
+# --- Prepare for next development iteration ("bump version") -------------
+echo "Prepare for next development iteration..."
+misc/updateversions "${nextVersion}-SNAPSHOT"
+git add .
+git commit -m "Prepare for next development iteration"
+git push origin
+
+# --- Deploying to Maven Central ------------------------------------------
+echo "Deploying release ${version} to Maven Central..."
+# checkout the release version (by tag)
+git checkout "v${version}"
+mvn -DskipTests=true clean deploy
+git checkout master # back to main development
+
+echo
+echo "Automatic part of releasing ${version} completed."
+# ====== End of automatic release process =================================
+
+# ====== Motivate remaining Manual Steps ==================================
+
+# --- get the path to the local Maven repository --------------------------
+m2repoDir=`mvn help:evaluate -Dexpression=settings.localRepository | grep -E '^([a-zA-Z]:|/)'`
+m2releaseDir="${m2repoDir}/org/abego/${projectName}/${mainModuleId}/${version}/"
+
+echo
+echo "    Remaining manual steps:"
+echo "        - on https://github.com/abego/${githubProject}/releases"
+echo "           - Create a new release ${version}"
+echo "           - Copy the CHANGELOG entry for ${version} to the server"
+echo "           - Add all files from local Maven repo to release on GitHub"
+
+read -p "Press Return to open GitHub, CHANGELOG and local Maven repo directory:"
+open "${m2releaseDir}"
+open "CHANGELOG.md"
+open "https://github.com/abego/${githubProject}/releases"

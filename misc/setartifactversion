@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# setartifactversion <artifactId> <version> <pomfile>
+#
+# Sets the version of the artifact with the given <artifactId>
+# to the given <version> (in pom.xml file <pomfile>)
+#
+
+if [ "$#" -ne 3 ]; then
+    echo "Usage: setartifactversion <artifactId> <version> <pomfile>"
+fi
+
+artifactId="$1"
+version="$2"
+file="$3"
+
+awk '\
+/<artifactId>'${artifactId}'<\/artifactId>/,/<\/version>/ {
+    if(index($0,"version")>0) {
+        sub(/<version>.*</,"<version>'${version}'<")
+    }
+}
+{print}
+' ${file} >${file}.tmp && mv ${file}.tmp ${file}
+
+

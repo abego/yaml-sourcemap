@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# updateversions <version>
+#
+# Sets the version of the artifacts of this project to the given <version>
+# (by updating all poms of this project).
+
+parentArtefactId="abego-yaml-sourcemap"
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: updateversions <version>"
+fi
+
+version="$1"
+
+misc/setartifactversion "${parentArtefactId}" "${version}" "pom.xml"
+misc/setartifactversion "${parentArtefactId}" "${version}" "abego-yaml-sourcemap-core/pom.xml"
+misc/setartifactversion "${parentArtefactId}" "${version}" "abego-yaml-sourcemap-examples/pom.xml"
