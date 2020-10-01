@@ -64,8 +64,8 @@
     </modules>
 
     <scm>
-        <url>https://github.com/abego/yamlsourcemap</url>
-        <connection>scm:https://github.com/abego/yamlsourcemap.git</connection>
+        <url>https://github.com/abego/yaml-sourcemap</url>
+        <connection>scm:https://github.com/abego/yaml-sourcemap.git</connection>
     </scm>
     <issueManagement>
         <system>GitHub</system>
