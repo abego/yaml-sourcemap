@@ -30,7 +30,7 @@
 
     <groupId>org.abego.yaml</groupId>
     <artifactId>abego-yaml-sourcemap</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>abego YAML Source Map (Parent)</name>
