@@ -130,7 +130,7 @@ git push origin
 echo "Deploying release ${version} to Maven Central..."
 # checkout the release version (by tag)
 git checkout "v${version}"
-mvn -DskipTests=true clean deploy
+mvn -DskipTests=true -DperformRelease=true clean deploy
 git checkout master # back to main development
 
 echo
