@@ -33,6 +33,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import static java.lang.Integer.max;
@@ -193,19 +194,19 @@ public final class YAMLSourceMapDefault implements YAMLSourceMap {
 
     @Override
     public Fragment fragmentAtOffset(int offset) {
-        int adjustedOffset = min(max(0, offset), documentLength() - 1);
+        int length = documentLength();
+        if (length == 0) {
+            throw new YAMLSourceMapException("Document is empty");
+        }
 
+        // Adjust the offset to always be in the range of the document
+        // text. This way we alays find a fragment for that adjustedOffset,
+        // maybe the first/last for offsets out of bounds.
+        int adjustedOffset = min(max(0, offset), length - 1);
         @Nullable
         Fragment result = findFirstFragmentMatching(
                 f -> f.containsOffset(adjustedOffset));
-
-        if (result != null)
-            return result;
-
-        throw new YAMLSourceMapException(
-                String.format("offset out of range. Expected 0..%d, got %d",
-                        documentLength() - 1,
-                        offset));
+        return Objects.requireNonNull(result);
     }
 
     @Override

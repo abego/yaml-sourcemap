@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
-public class YAMLSourceMapTest {
+class YAMLSourceMapTest {
 
     private static final String FRAGMENTS_TSV_HEADER = "startOffset\tstartLine\tstartColumn\tendOffset\tendLine\tendColumn\tkind\tjsonPointer\n";
 
@@ -315,6 +315,17 @@ public class YAMLSourceMapTest {
         // an offset >= documentLength-1 returns the last fragment
         assertFragmentEquals(7, 2, 4, 8, 3, 1, Kind.SEQUENCE, "",
                 srcMap.fragmentAtOffset(8));
+    }
+
+    @Test
+    void fragmentAtOffset_emptyDoc() {
+        String yaml = "";
+
+        YAMLSourceMap srcMap = createYAMLSourceMap(yaml);
+
+        YAMLSourceMapException e = assertThrows(YAMLSourceMapException.class,
+                () -> srcMap.fragmentAtOffset(0));
+        assertEquals("Document is empty",e.getMessage());
     }
 
     @Test
