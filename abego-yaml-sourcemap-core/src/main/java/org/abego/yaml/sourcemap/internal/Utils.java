@@ -86,7 +86,7 @@ final class Utils {
         ParserImpl parser = new ParserImpl(new StreamReader(reader));
         while (!parser.checkEvent(Event.ID.StreamEnd)) {
             Event event = parser.getEvent();
-            printStream.printf("%d\t%d\t%s\n%s\n%s%n",
+            printStream.printf("%d\t%d\t%s\n%s\n%s\n",
                     event.getStartMark().getIndex(),
                     event.getEndMark().getIndex(),
                     event.getEventId().toString(),
